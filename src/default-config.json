@@ -1,0 +1,68 @@
+{
+  "checkbox": {
+    "groupSidebar": {
+      "avatar": {
+        "selector": ".group-user__avatar"
+      },
+      "membersCount": {
+        "selector": ".group-member-title span"
+      },
+      "name": {
+        "selector": ".group-user__name"
+      },
+      "notice": {
+        "selector": ".group-notice .content"
+      }
+    },
+    "messageList": {
+      "avatar": {
+        "selector": ".message-container__avatar"
+      },
+      "contactName": {
+        "selector": "#chatHeaderContactName"
+      },
+      "input": {
+        "selector": ".ck-content p"
+      },
+      "membersCount": {
+        "selector": "#chatHeaderMembersCount"
+      },
+      "name": {
+        "selector": ".user-name .text-ellipsis"
+      },
+      "time": {
+        "selector": ".babble"
+      },
+      "tip": {
+        "selector": ".gray-tip-content"
+      }
+    },
+    "sessionList": {
+      "avatar": {
+        "selector": ".list-item__avatar .avatar"
+      },
+      "badge": {
+        "selector": ".q-badge-sub"
+      },
+      "summary": {
+        "selector": ".summary-main .text-ellipsis"
+      },
+      "time": {
+        "selector": ".secondary-info span"
+      },
+      "title": {
+        "selector": ".main-info span"
+      }
+    },
+    "user": {
+      "avatar": {
+        "selector": ".user-avatar"
+      }
+    }
+  },
+  "style": {
+    "filter": {
+      "blur": 10
+    }
+  }
+}

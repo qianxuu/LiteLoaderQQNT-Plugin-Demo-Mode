@@ -4,7 +4,7 @@
   "name": "演示模式",
   "slug": "demo-mode",
   "description": "对界面上的元素进行模糊处理以便演示或截图",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": [
     {
       "name": "谦虚",

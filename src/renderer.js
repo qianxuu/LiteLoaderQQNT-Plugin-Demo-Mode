@@ -20,55 +20,58 @@ const demoModeBtnHTML = `
 `
 
 function onLoad() {
-  // 插入演示模式按钮
-  const funcMenu = document.querySelector('.func-menu')
-  if (funcMenu) {
-    funcMenu.insertAdjacentHTML('afterbegin', demoModeBtnHTML)
-    // 添加演示模式按钮鼠标悬停效果
-    const demoModeBtnImg = document.querySelector('#demoModeBtnImg')
-    demoModeBtnImg.addEventListener('mouseenter', () => {
-      demoModeBtnImg.src = demoModeBtnIconBlue
-    })
-    demoModeBtnImg.addEventListener('mouseleave', () => {
-      demoModeBtnImg.src = demoModeBtnIconBlack
-    })
-    // 添加演示模式按钮点击事件
-    const demoModeBtn = document.querySelector('#demoModeBtn')
-    demoModeBtn.addEventListener('click', () => {
-      // 获取演示模式样式
-      const demoModeStyle = document.querySelectorAll('.demoModeStyle')
-      // 开关
-      if (demoModeStyle.length !== 0) {
-        demoModeStyle.forEach((style) => style.remove())
-      } else {
-        // 获取配置
-        getConfig(dataPath).then((config) => {
-          const { checkbox, style } = config
-          const { blur } = style.filter
-          // 遍历配置文件中的配置
-          for (const key in checkbox) {
-            // 遍历配置子项
-            for (const subKey in checkbox[key]) {
-              // 如果配置为 true，则插入样式
-              if (checkbox[key][subKey].checked) {
-                const { selector } = checkbox[key][subKey]
-                document.head.insertAdjacentHTML(
-                  'beforeend',
-                  `
-                  <style class="demoModeStyle">
-                    ${selector} {
-                      filter: blur(${blur}px);
-                    }
-                  </style>
-                  `
-                )
+  const findFuncMenuInterval = setInterval(() => {
+    // 插入演示模式按钮
+    const funcMenu = document.querySelector('.func-menu')
+    if (funcMenu) {
+      clearInterval(findFuncMenuInterval)
+      funcMenu.insertAdjacentHTML('afterbegin', demoModeBtnHTML)
+      // 添加演示模式按钮鼠标悬停效果
+      const demoModeBtnImg = document.querySelector('#demoModeBtnImg')
+      demoModeBtnImg.addEventListener('mouseenter', () => {
+        demoModeBtnImg.src = demoModeBtnIconBlue
+      })
+      demoModeBtnImg.addEventListener('mouseleave', () => {
+        demoModeBtnImg.src = demoModeBtnIconBlack
+      })
+      // 添加演示模式按钮点击事件
+      const demoModeBtn = document.querySelector('#demoModeBtn')
+      demoModeBtn.addEventListener('click', () => {
+        // 获取演示模式样式
+        const demoModeStyle = document.querySelectorAll('.demoModeStyle')
+        // 开关
+        if (demoModeStyle.length !== 0) {
+          demoModeStyle.forEach((style) => style.remove())
+        } else {
+          // 获取配置
+          getConfig(dataPath).then((config) => {
+            const { checkbox, style } = config
+            const { blur } = style.filter
+            // 遍历配置文件中的配置
+            for (const key in checkbox) {
+              // 遍历配置子项
+              for (const subKey in checkbox[key]) {
+                // 如果配置为 true，则插入样式
+                if (checkbox[key][subKey].checked) {
+                  const { selector } = checkbox[key][subKey]
+                  document.head.insertAdjacentHTML(
+                    'beforeend',
+                    `
+                    <style class="demoModeStyle">
+                      ${selector} {
+                        filter: blur(${blur}px);
+                      }
+                    </style>
+                    `
+                  )
+                }
               }
             }
-          }
-        })
-      }
-    })
-  }
+          })
+        }
+      })
+    }
+  }, 100)
 }
 
 async function onConfigView(view) {

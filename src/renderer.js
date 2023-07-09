@@ -20,9 +20,9 @@ const demoModeBtnHTML = `
 `
 
 function onLoad() {
-  setTimeout(() => {
-    // 插入演示模式按钮
-    const funcMenu = document.querySelector('.func-menu')
+  // 插入演示模式按钮
+  const funcMenu = document.querySelector('.func-menu')
+  if (funcMenu) {
     funcMenu.insertAdjacentHTML('afterbegin', demoModeBtnHTML)
     // 添加演示模式按钮鼠标悬停效果
     const demoModeBtnImg = document.querySelector('#demoModeBtnImg')
@@ -68,7 +68,7 @@ function onLoad() {
         })
       }
     })
-  }, 2000)
+  }
 }
 
 async function onConfigView(view) {

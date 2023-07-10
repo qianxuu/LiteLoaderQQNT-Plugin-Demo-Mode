@@ -62,7 +62,7 @@
   },
   "style": {
     "filter": {
-      "blur": 10
+      "blur": 0
     }
   }
 }

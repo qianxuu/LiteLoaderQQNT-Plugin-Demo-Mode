@@ -21,6 +21,7 @@ function onLoad() {
           checkbox[key][subKey].checked = true
         }
       }
+      defaultConfig.style.filter.blur = 10
       // 写入默认配置
       fs.writeFileSync(configPath, JSON.stringify(defaultConfig))
     }

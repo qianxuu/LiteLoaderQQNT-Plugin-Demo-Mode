@@ -1,0 +1,67 @@
+.demo-mode-setting fieldset {
+  margin: 0 2px;
+  padding: 0.35em 0.75em 0.625em;
+  border: 2px groove rgb(192, 192, 192);
+  border-radius: 8px;
+}
+
+.demo-mode-setting legend {
+  padding: 0 2px;
+}
+
+.demo-mode-setting input {
+  appearance: auto;
+}
+
+.demo-mode-setting .setting-item-title {
+  color: var(--text_primary);
+  font-weight: var(--font-bold);
+  font-size: min(var(--font_size_3), 18px);
+  line-height: min(var(--line_height_3), 24px);
+  margin: 0px 0px 8px 16px;
+}
+
+.demo-mode-setting .setting-item-content {
+  background-color: var(--fill_light_primary);
+  border-radius: 8px;
+  font-size: min(var(--font_size_3), 18px);
+  line-height: min(var(--line_height_3), 24px);
+  padding: 0 16px;
+  margin-bottom: 24px;
+}
+
+.demo-mode-setting .setting-item-content .blur-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: rgba(0, 0, 0, 0.04) 1px solid;
+  padding: 12px 0px;
+}
+
+.demo-mode-setting .setting-item-content .blur-item .title {
+  display: flex;
+  align-items: center;
+}
+
+.demo-mode-setting .setting-item-content .blur-item .checkbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.demo-mode-setting .setting-item-content .blur-radius {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0px;
+}
+
+.demo-mode-setting .setting-item-content .blur-radius .input {
+  display: flex;
+  justify-items: center;
+}
+
+#blurRadiusNumber {
+  width: 60px;
+  border-radius: 4px;
+  border: #ebebeb 1px solid;
+  font-size: 13px;
+  padding: 2px 8px;
+}

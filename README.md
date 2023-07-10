@@ -18,10 +18,8 @@ LiteLoaderQQNT Telegram 闲聊群：[Telegram](https://t.me/LiteLoaderQQNT)
 
 ![开关图标](https://img.chkaja.com/50261b75baee33aa.png)
 ![转换效果](https://img.chkaja.com/a985c28683415ea0.png)
-![设置页面](https://img.chkaja.com/8de24c54d47e395f.png)
+![设置页面](https://img.chkaja.com/2b0c000c45a4fbc6.png)
 
-### Todo
+### TODO
 
-- [ ] 模糊度设置
-  - [x] 逻辑
-  - [ ] 页面
+- [x] 模糊度设置

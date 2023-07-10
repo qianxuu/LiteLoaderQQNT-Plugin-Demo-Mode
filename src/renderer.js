@@ -25,6 +25,7 @@ function onLoad() {
     const funcMenu = document.querySelector('.func-menu')
     if (funcMenu) {
       clearInterval(findFuncMenuInterval)
+      // 插入演示模式按钮
       funcMenu.insertAdjacentHTML('afterbegin', demoModeBtnHTML)
       // 添加演示模式按钮鼠标悬停效果
       const demoModeBtnImg = document.querySelector('#demoModeBtnImg')
@@ -41,7 +42,7 @@ function onLoad() {
         const demoModeStyle = document.querySelectorAll('.demoModeStyle')
         // 开关
         if (demoModeStyle.length !== 0) {
-          demoModeStyle.forEach((style) => style.remove())
+          demoModeStyle.forEach((item) => item.remove())
         } else {
           // 获取配置
           getConfig(dataPath).then((config) => {
@@ -75,18 +76,17 @@ function onLoad() {
 }
 
 async function onConfigView(view) {
-  const htmlFilePath = `file:///${pluginPath}/src/settings/settings.html`
-  const cssFilePath = `file:///${pluginPath}/src/settings/settings.css`
-
+  // 获取设置页文件路径
+  const htmlFilePath = `file:///${pluginPath}/src/setting/setting.html`
+  const cssFilePath = `file:///${pluginPath}/src/setting/setting.css`
+  // 插入设置页
   const htmlText = await (await fetch(htmlFilePath)).text()
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(htmlText, 'text/html')
-  doc.querySelectorAll('section').forEach((node) => view.appendChild(node))
-
-  const css = document.createElement('link')
-  css.rel = 'stylesheet'
-  css.href = cssFilePath
-  document.head.appendChild(css)
+  view.insertAdjacentHTML('afterbegin', htmlText)
+  // 插入设置页样式
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = cssFilePath
+  document.head.appendChild(link)
 
   // 获取配置
   getConfig(dataPath).then((config) => {
@@ -106,6 +106,39 @@ async function onConfigView(view) {
         config.checkbox[checkbox.parentNode.parentNode.id][checkbox.name].checked = checkbox.checked
         setConfig(dataPath, config)
       })
+    })
+    // 从配置中获取模糊度
+    const { blur } = config.style.filter
+    // 获取模糊度输入框
+    const blurRadiusRange = view.querySelector('#blurRadiusRange')
+    const blurRadiusNumber = view.querySelector('#blurRadiusNumber')
+    // 设置模糊度输入框值
+    blurRadiusRange.value = blur
+    blurRadiusNumber.value = blur
+
+    // 添加模糊度 range 输入框事件
+    blurRadiusRange.addEventListener('input', () => {
+      // 将值同步到 number 输入框
+      blurRadiusNumber.value = blurRadiusRange.value
+      // 修改配置
+      config.style.filter.blur = blurRadiusRange.value
+      setConfig(dataPath, config)
+    })
+    // 添加模糊度 number 输入框事件
+    blurRadiusNumber.addEventListener('input', () => {
+      // 如果值在 1-50 之外，则将值重置
+      if (blurRadiusNumber.value < 1 || blurRadiusNumber.value > 50) {
+        if (blurRadiusNumber.value < 1) {
+          blurRadiusNumber.value = 1
+        } else {
+          blurRadiusNumber.value = 50
+        }
+      }
+      // 将值同步到 range 输入框
+      blurRadiusRange.value = blurRadiusNumber.value
+      // 修改配置
+      config.style.filter.blur = blurRadiusNumber.value
+      setConfig(dataPath, config)
     })
   })
 }

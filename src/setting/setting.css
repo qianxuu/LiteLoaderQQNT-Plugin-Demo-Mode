@@ -23,7 +23,7 @@
   font-weight: var(--font-bold);
   font-size: min(var(--font_size_3), 18px);
   line-height: min(var(--line_height_3), 24px);
-  margin: 0px 0px 8px 16px;
+  margin: 0 0 8px 16px;
 }
 
 .demo-mode-setting .setting-item-content {
@@ -37,7 +37,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid var(--blur-item-border-bottom-color);
-  padding: 12px 0px;
+  padding: 12px 0;
 }
 
 .demo-mode-setting .setting-item-content .blur-item .title {

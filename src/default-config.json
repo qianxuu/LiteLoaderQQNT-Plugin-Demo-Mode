@@ -28,7 +28,7 @@
         "selector": "#chatHeaderMembersCount"
       },
       "name": {
-        "selector": ".user-name .text-ellipsis, .reply-title .reply-info .text-ellipsis"
+        "selector": ".user-name .text-ellipsis, .reply-title .reply-info .text-ellipsis, .text-element--at"
       },
       "time": {
         "selector": ".babble"
@@ -65,5 +65,5 @@
       "blur": 0
     }
   },
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

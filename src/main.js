@@ -13,8 +13,14 @@ function onLoad() {
       if (!fs.existsSync(dataPath)) {
         fs.mkdirSync(dataPath, { recursive: true })
       }
-      // 从 default-config.json 中读取默认配置, 并设置默认值
-      const defaultConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'default-config.json'), 'utf-8'))
+      fs.writeFileSync(configPath, '{}')
+    }
+    // 读取配置
+    const defaultConfig = JSON.parse(fs.readFileSync(path.join(__dirname, 'default-config.json'), 'utf-8'))
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+    // 如果配置版本号不一致则重置配置
+    if (config.version !== defaultConfig.version) {
+      // 设置默认值
       const { checkbox } = defaultConfig
       for (const key in checkbox) {
         for (const subKey in checkbox[key]) {
@@ -22,11 +28,10 @@ function onLoad() {
         }
       }
       defaultConfig.style.filter.blur = 10
-      // 写入默认配置
+      // 写入配置
       fs.writeFileSync(configPath, JSON.stringify(defaultConfig))
+      return defaultConfig
     }
-    // 读取配置
-    const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
     return config
   })
 

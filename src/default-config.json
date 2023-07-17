@@ -28,7 +28,7 @@
         "selector": "#chatHeaderMembersCount"
       },
       "name": {
-        "selector": ".user-name .text-ellipsis"
+        "selector": ".user-name .text-ellipsis, .reply-title .reply-info .text-ellipsis"
       },
       "time": {
         "selector": ".babble"
@@ -41,8 +41,8 @@
       "avatar": {
         "selector": ".list-item__avatar .avatar"
       },
-      "badge": {
-        "selector": ".q-badge-sub"
+      "bubble": {
+        "selector": ".summary-bubble div > div, .summary-bubble div > i"
       },
       "summary": {
         "selector": ".summary-main .text-ellipsis"
@@ -64,5 +64,6 @@
     "filter": {
       "blur": 0
     }
-  }
+  },
+  "version": "1.0.0"
 }

@@ -5,13 +5,13 @@
         "selector": ".group-user__avatar"
       },
       "membersCount": {
-        "selector": ".group-member-title span"
+        "selector": ".group-member-title > span"
       },
       "name": {
         "selector": ".group-user__name"
       },
       "notice": {
-        "selector": ".group-notice .content"
+        "selector": ".group-notice > .content"
       }
     },
     "messageList": {
@@ -19,16 +19,16 @@
         "selector": ".message-container__avatar"
       },
       "contactName": {
-        "selector": "#chatHeaderContactName"
+        "selector": ".chat-header__title > .text-ellipsis"
       },
       "input": {
-        "selector": ".ck-content p"
+        "selector": ".ck-content > p"
       },
       "membersCount": {
-        "selector": "#chatHeaderMembersCount"
+        "selector": ".chat-header__title > .text-ellipsis + span"
       },
       "name": {
-        "selector": ".user-name .text-ellipsis, .text-element--at, .reply-title .reply-info .text-ellipsis, .reply-content .mixed-container span:nth-last-child(2)"
+        "selector": ".user-name > .text-ellipsis, .text-element--at, .reply-title > .reply-info > .text-ellipsis"
       },
       "time": {
         "selector": ".babble"
@@ -39,19 +39,19 @@
     },
     "sessionList": {
       "avatar": {
-        "selector": ".list-item__avatar .avatar"
+        "selector": ".list-item__avatar > .avatar"
       },
       "bubble": {
-        "selector": ".summary-bubble div > div, .summary-bubble div > i"
+        "selector": ".summary-bubble sub, .summary-bubble i"
       },
       "summary": {
-        "selector": ".summary-main .text-ellipsis"
+        "selector": ".summary-main > .text-ellipsis, .summary-main > span"
       },
       "time": {
-        "selector": ".secondary-info span"
+        "selector": ".secondary-info"
       },
       "title": {
-        "selector": ".main-info span"
+        "selector": ".main-info > .text-ellipsis"
       }
     },
     "user": {
@@ -65,5 +65,5 @@
       "blur": 0
     }
   },
-  "version": "1.0.2"
+  "version": "1.1.0"
 }

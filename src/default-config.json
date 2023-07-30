@@ -16,7 +16,7 @@
     },
     "messageList": {
       "avatar": {
-        "selector": ".message-container__avatar"
+        "selector": ".message-container__avatar, .avatar-row > .avatar-white-border"
       },
       "contactName": {
         "selector": ".chat-header__title > .text-ellipsis"
@@ -28,7 +28,7 @@
         "selector": ".chat-header__title > .text-ellipsis + span"
       },
       "name": {
-        "selector": ".user-name > .text-ellipsis, .text-element--at, .reply-title > .reply-info > .text-ellipsis"
+        "selector": ".user-name > .text-ellipsis, .text-element--at, .reply-title > .reply-info > .text-ellipsis, .av-call-info > .name-text"
       },
       "time": {
         "selector": ".babble"
@@ -39,7 +39,7 @@
     },
     "sessionList": {
       "avatar": {
-        "selector": ".list-item__avatar > .avatar"
+        "selector": ".list-item__avatar > .avatar, .list-item__avatar > .recent-contact-item__phone"
       },
       "bubble": {
         "selector": ".summary-bubble sub, .summary-bubble i"
@@ -51,7 +51,7 @@
         "selector": ".secondary-info"
       },
       "title": {
-        "selector": ".main-info > .text-ellipsis"
+        "selector": ".main-info > span"
       }
     },
     "user": {
@@ -65,5 +65,5 @@
       "blur": 0
     }
   },
-  "version": "1.1.0"
+  "version": "1.1.1"
 }

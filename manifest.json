@@ -1,11 +1,11 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "type": "extension",
   "name": "演示模式",
   "slug": "demo-mode",
   "description": "对界面上的元素进行模糊处理以便演示或截图",
-  "version": "1.4.0",
-  "thumbnail": "https://img.chkaja.com/b94d32a744e9c5c5.png",
+  "version": "1.4.1",
+  "thumbnail": "./icon.png",
   "author": {
     "name": "谦虚",
     "link": "https://github.com/qianxuu"

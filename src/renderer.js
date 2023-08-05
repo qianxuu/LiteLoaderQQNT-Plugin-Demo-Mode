@@ -1,7 +1,7 @@
 const { getConfig, setConfig } = window.demoMode
 const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins['demo-mode'].path
 
-const demoModeBtnHTML = `
+const DEMO_MODE_BTN_HTML = `
 <div
   id="demoModeBtn"
   style="app-region: no-drag; display: flex; height: 24px; justify-content: center; margin-bottom: 16px"
@@ -16,7 +16,7 @@ const demoModeBtnHTML = `
   </i>
 </div>
 `
-const demoModeBtnStyleHTML = `
+const DEMO_MODE_BTN_STYLE_HTML = `
 <style>
   #demoModeBtn i:hover {
     color: var(--brand_standard) !important;
@@ -24,15 +24,15 @@ const demoModeBtnStyleHTML = `
 </style>
 `
 
-function onLoad() {
+const onLoad = () => {
   const findFuncMenuInterval = setInterval(() => {
     // 获取功能菜单
     const funcMenu = document.querySelector('.func-menu')
     if (funcMenu) {
       clearInterval(findFuncMenuInterval)
       // 插入演示模式按钮和悬停样式
-      funcMenu.insertAdjacentHTML('afterbegin', demoModeBtnHTML)
-      document.head.insertAdjacentHTML('beforeend', demoModeBtnStyleHTML)
+      funcMenu.insertAdjacentHTML('afterbegin', DEMO_MODE_BTN_HTML)
+      document.head.insertAdjacentHTML('beforeend', DEMO_MODE_BTN_STYLE_HTML)
       // 监听演示模式按钮点击
       const demoModeBtn = document.querySelector('#demoModeBtn')
       demoModeBtn.addEventListener('click', () => {
@@ -73,7 +73,7 @@ function onLoad() {
   }, 100)
 }
 
-async function onConfigView(view) {
+const onConfigView = async (view) => {
   // 获取设置页文件路径
   const htmlFilePath = `llqqnt://local-file/${pluginPath}/src/setting/setting.html`
   const cssFilePath = `llqqnt://local-file/${pluginPath}/src/setting/setting.css`
@@ -81,10 +81,7 @@ async function onConfigView(view) {
   const htmlText = await (await fetch(htmlFilePath)).text()
   view.insertAdjacentHTML('afterbegin', htmlText)
   // 插入设置页样式
-  const link = document.createElement('link')
-  link.rel = 'stylesheet'
-  link.href = cssFilePath
-  document.head.appendChild(link)
+  document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${cssFilePath}" />`)
   // 获取是否为深色模式
   const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
   // 设置深色模式样式

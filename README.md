@@ -23,3 +23,4 @@ LiteLoaderQQNT Telegram 闲聊群：[Telegram](https://t.me/LiteLoaderQQNT)
 ### TODO
 
 - [x] 模糊度设置
+- [ ] 对独立聊天窗口生效

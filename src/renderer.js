@@ -1,5 +1,5 @@
-const { getConfig, setConfig } = window.demoMode
-const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins['demo-mode'].path
+const { getConfig, setConfig } = window.demoMode;
+const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins["demo-mode"].path;
 
 const DEMO_MODE_BTN_HTML = `
 <div
@@ -15,46 +15,46 @@ const DEMO_MODE_BTN_HTML = `
     </svg>
   </i>
 </div>
-`
+`;
 const DEMO_MODE_BTN_STYLE_HTML = `
 <style>
   #demoModeBtn i:hover {
     color: var(--brand_standard) !important;
   }
 </style>
-`
+`;
 
 const onLoad = () => {
   const findFuncMenuInterval = setInterval(() => {
     // 获取功能菜单
-    const funcMenu = document.querySelector('.func-menu')
+    const funcMenu = document.querySelector(".func-menu");
     if (funcMenu) {
-      clearInterval(findFuncMenuInterval)
+      clearInterval(findFuncMenuInterval);
       // 插入演示模式按钮和悬停样式
-      funcMenu.insertAdjacentHTML('afterbegin', DEMO_MODE_BTN_HTML)
-      document.head.insertAdjacentHTML('beforeend', DEMO_MODE_BTN_STYLE_HTML)
+      funcMenu.insertAdjacentHTML("afterbegin", DEMO_MODE_BTN_HTML);
+      document.head.insertAdjacentHTML("beforeend", DEMO_MODE_BTN_STYLE_HTML);
       // 监听演示模式按钮点击
-      const demoModeBtn = document.querySelector('#demoModeBtn')
-      demoModeBtn.addEventListener('click', () => {
+      const demoModeBtn = document.querySelector("#demoModeBtn");
+      demoModeBtn.addEventListener("click", () => {
         // 获取演示模式样式
-        const demoModeStyle = document.querySelectorAll('.demoModeStyle')
+        const demoModeStyle = document.querySelectorAll(".demoModeStyle");
         // 开关
         if (demoModeStyle.length !== 0) {
-          demoModeStyle.forEach((item) => item.remove())
+          demoModeStyle.forEach((item) => item.remove());
         } else {
           // 获取配置
           getConfig(dataPath).then((config) => {
-            const { checkbox, style } = config
-            const { blur } = style.filter
+            const { checkbox, style } = config;
+            const { blur } = style.filter;
             // 遍历配置文件中的配置
             for (const key in checkbox) {
               // 遍历配置子项
               for (const subKey in checkbox[key]) {
                 // 如果配置为 true，则插入样式
                 if (checkbox[key][subKey].checked) {
-                  const { selector } = checkbox[key][subKey]
+                  const { selector } = checkbox[key][subKey];
                   document.head.insertAdjacentHTML(
-                    'beforeend',
+                    "beforeend",
                     `
                     <style class="demoModeStyle">
                       ${selector} {
@@ -62,100 +62,100 @@ const onLoad = () => {
                       }
                     </style>
                     `
-                  )
+                  );
                 }
               }
             }
-          })
+          });
         }
-      })
+      });
     }
-  }, 100)
-}
-
-const onConfigView = async (view) => {
+  }, 100);
+};
+onLoad();
+const onSettingWindowCreated = async (view) => {
   // 获取设置页文件路径
-  const htmlFilePath = `llqqnt://local-file/${pluginPath}/src/setting/setting.html`
-  const cssFilePath = `llqqnt://local-file/${pluginPath}/src/setting/setting.css`
+  const htmlFilePath = `local:///${pluginPath}/src/setting/setting.html`;
+  const cssFilePath = `local:///${pluginPath}/src/setting/setting.css`;
   // 插入设置页
-  const htmlText = await (await fetch(htmlFilePath)).text()
-  view.insertAdjacentHTML('afterbegin', htmlText)
+  const htmlText = await (await fetch(htmlFilePath)).text();
+  view.insertAdjacentHTML("afterbegin", htmlText);
   // 插入设置页样式
-  document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${cssFilePath}" />`)
+  document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="${cssFilePath}" />`);
   // 获取是否为深色模式
-  const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
+  const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
   // 设置深色模式样式
   const setDarkStyle = () => {
-    document.documentElement.style.setProperty('--fieldset-border-color', 'rgba(255, 255, 255, 0.2)')
-    document.documentElement.style.setProperty('--blur-item-border-bottom-color', 'rgba(255, 255, 255, 0.06)')
-  }
+    document.documentElement.style.setProperty("--fieldset-border-color", "rgba(255, 255, 255, 0.2)");
+    document.documentElement.style.setProperty("--blur-item-border-bottom-color", "rgba(255, 255, 255, 0.06)");
+  };
   // 如果为深色模式，则设置深色模式样式
   if (prefersColorScheme.matches) {
-    setDarkStyle()
+    setDarkStyle();
   }
   // 监听外观模式变化
-  prefersColorScheme.addEventListener('change', (event) => {
+  prefersColorScheme.addEventListener("change", (event) => {
     if (event.matches) {
-      setDarkStyle()
+      setDarkStyle();
     } else {
       // 移除深色模式样式
-      document.documentElement.style.removeProperty('--fieldset-border-color')
-      document.documentElement.style.removeProperty('--blur-item-border-bottom-color')
+      document.documentElement.style.removeProperty("--fieldset-border-color");
+      document.documentElement.style.removeProperty("--blur-item-border-bottom-color");
     }
-  })
+  });
   // 获取配置
   getConfig(dataPath).then((config) => {
     // 获取设置页所有复选框
-    const checkboxes = view.querySelectorAll('input[type="checkbox"]')
+    const checkboxes = view.querySelectorAll('input[type="checkbox"]');
     // 遍历复选框
     checkboxes.forEach((checkbox) => {
       // 从配置中获取复选框状态
-      const { checked } = config.checkbox[checkbox.parentNode.parentNode.id][checkbox.name]
+      const { checked } = config.checkbox[checkbox.parentNode.parentNode.id][checkbox.name];
       // 设置复选框状态
       if (checked) {
-        checkbox.checked = true
+        checkbox.checked = true;
       }
       // 监听复选框点击
-      checkbox.addEventListener('click', () => {
+      checkbox.addEventListener("click", () => {
         // 修改配置
-        config.checkbox[checkbox.parentNode.parentNode.id][checkbox.name].checked = checkbox.checked
-        setConfig(dataPath, config)
-      })
-    })
+        config.checkbox[checkbox.parentNode.parentNode.id][checkbox.name].checked = checkbox.checked;
+        setConfig(dataPath, config);
+      });
+    });
     // 从配置中获取模糊度
-    const { blur } = config.style.filter
+    const { blur } = config.style.filter;
     // 获取模糊度输入框
-    const blurRadiusRange = view.querySelector('#blurRadiusRange')
-    const blurRadiusNumber = view.querySelector('#blurRadiusNumber')
+    const blurRadiusRange = view.querySelector("#blurRadiusRange");
+    const blurRadiusNumber = view.querySelector("#blurRadiusNumber");
     // 设置模糊度输入框值
-    blurRadiusRange.value = blur
-    blurRadiusNumber.value = blur
+    blurRadiusRange.value = blur;
+    blurRadiusNumber.value = blur;
 
     // 监听模糊度 range 输入框变化
-    blurRadiusRange.addEventListener('input', () => {
+    blurRadiusRange.addEventListener("input", () => {
       // 将值同步到 number 输入框
-      blurRadiusNumber.value = blurRadiusRange.value
+      blurRadiusNumber.value = blurRadiusRange.value;
       // 修改配置
-      config.style.filter.blur = blurRadiusRange.value
-      setConfig(dataPath, config)
-    })
+      config.style.filter.blur = blurRadiusRange.value;
+      setConfig(dataPath, config);
+    });
     // 监听模糊度 number 输入框变化
-    blurRadiusNumber.addEventListener('input', () => {
+    blurRadiusNumber.addEventListener("input", () => {
       // 如果值在 1-50 之外，则将值重置
       if (blurRadiusNumber.value < 1 || blurRadiusNumber.value > 50) {
         if (blurRadiusNumber.value < 1) {
-          blurRadiusNumber.value = 1
+          blurRadiusNumber.value = 1;
         } else {
-          blurRadiusNumber.value = 50
+          blurRadiusNumber.value = 50;
         }
       }
       // 将值同步到 range 输入框
-      blurRadiusRange.value = blurRadiusNumber.value
+      blurRadiusRange.value = blurRadiusNumber.value;
       // 修改配置
-      config.style.filter.blur = blurRadiusNumber.value
-      setConfig(dataPath, config)
-    })
-  })
-}
+      config.style.filter.blur = blurRadiusNumber.value;
+      setConfig(dataPath, config);
+    });
+  });
+};
 
-export { onLoad, onConfigView }
+export { onSettingWindowCreated };

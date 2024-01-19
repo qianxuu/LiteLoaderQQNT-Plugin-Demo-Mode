@@ -1,15 +1,17 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 4,
   "type": "extension",
   "name": "演示模式",
   "slug": "demo-mode",
   "description": "对界面上的元素进行模糊处理以便演示或截图",
   "version": "1.4.1",
-  "thumbnail": "./icon.png",
-  "author": {
-    "name": "谦虚",
-    "link": "https://github.com/qianxuu"
-  },
+  "icon": "./icon.png",
+  "authors": [
+    {
+      "name": "谦虚",
+      "link": "https://github.com/qianxuu"
+    }
+  ],
   "repository": {
     "repo": "qianxuu/LiteLoaderQQNT-Plugin-Demo-mode",
     "branch": "main"

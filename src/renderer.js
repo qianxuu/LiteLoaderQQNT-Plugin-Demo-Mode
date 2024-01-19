@@ -75,8 +75,8 @@ const onLoad = () => {
 onLoad();
 const onSettingWindowCreated = async (view) => {
   // 获取设置页文件路径
-  const htmlFilePath = `llqqnt://local-file/${pluginPath}/src/setting/setting.html`;
-  const cssFilePath = `llqqnt://local-file/${pluginPath}/src/setting/setting.css`;
+  const htmlFilePath = `local:///${pluginPath}/src/setting/setting.html`;
+  const cssFilePath = `local:///${pluginPath}/src/setting/setting.css`;
   // 插入设置页
   const htmlText = await (await fetch(htmlFilePath)).text();
   view.insertAdjacentHTML("afterbegin", htmlText);

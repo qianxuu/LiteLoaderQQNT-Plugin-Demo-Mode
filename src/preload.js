@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
-contextBridge.exposeInMainWorld('demoMode', {
-  getConfig: (dataPath) => ipcRenderer.invoke('demoMode.getConfig', dataPath),
-  setConfig: (dataPath, config) => ipcRenderer.invoke('demoMode.setConfig', dataPath, config),
+contextBridge.exposeInMainWorld('DemoMode', {
+  getConfig: (dataPath) => ipcRenderer.invoke('DemoMode.getConfig', dataPath),
+  setConfig: (dataPath, config) => ipcRenderer.invoke('DemoMode.setConfig', dataPath, config),
 })

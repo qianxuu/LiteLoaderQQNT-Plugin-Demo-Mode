@@ -1,6 +1,6 @@
-# LiteLoaderQQNT-Plugin-Demo-mode
+# LiteLoaderQQNT-Plugin-Demo-Mode
 
-### 本插件可对界面上的元素进行模糊处理以便演示或截图
+### 本插件可对 QQ 界面上的元素进行模糊处理以便演示或截图
 
 LiteLoaderQQNT 本体：[LiteLoaderQQNT](https://github.com/mo-jinran/LiteLoaderQQNT)
 

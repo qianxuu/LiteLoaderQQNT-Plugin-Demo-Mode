@@ -21,6 +21,9 @@
       "contactName": {
         "selector": ".chat-header__title > .text-ellipsis"
       },
+      "content": {
+        "selector": ".msg-content-container, .forward-msg"
+      },
       "input": {
         "selector": ".ck-content > p"
       },
@@ -39,19 +42,19 @@
     },
     "sessionList": {
       "avatar": {
-        "selector": ".list-item__avatar > .avatar, .list-item__avatar > .recent-contact-item__phone"
+        "selector": ".list-item__avatar > :is(.avatar, .recent-contact-item__phone)"
       },
       "bubble": {
-        "selector": ".summary-bubble sub, .summary-bubble i"
+        "selector": ".summary-bubble > :is(div, i)"
       },
       "summary": {
-        "selector": ".summary-main > .text-ellipsis, .summary-main > span"
+        "selector": ".summary-main.text-ellipsis"
       },
       "time": {
-        "selector": ".secondary-info"
+        "selector": ".secondary-info.text-ellipsis > span"
       },
       "title": {
-        "selector": ".main-info > span"
+        "selector": ".main-info.text-ellipsis > :is(.text-ellipsis, .member-count)"
       }
     },
     "user": {
@@ -65,5 +68,5 @@
       "blur": 0
     }
   },
-  "version": "1.1.1"
+  "version": "1.2.0"
 }

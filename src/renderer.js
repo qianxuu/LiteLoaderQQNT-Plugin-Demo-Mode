@@ -67,12 +67,12 @@ const addDemoModeBtnInterval = setInterval(() => {
     clearInterval(addDemoModeBtnInterval)
     addDemoModeBtn()
   }
-}, 500)
+}, 1000)
 
 // 超时清除定时器
 setTimeout(() => {
   clearInterval(addDemoModeBtnInterval)
-}, 3000)
+}, 10000)
 
 export const onSettingWindowCreated = async (view) => {
   // 获取设置页文件路径

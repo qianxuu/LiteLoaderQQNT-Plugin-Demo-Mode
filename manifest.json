@@ -4,7 +4,7 @@
   "name": "演示模式",
   "slug": "demo_mode",
   "description": "对 QQ 界面上的元素进行模糊处理以便演示或截图",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "icon": "./icon.png",
   "authors": [
     {

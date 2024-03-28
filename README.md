@@ -8,7 +8,7 @@ LiteLoaderQQNT Telegram 闲聊群：[Telegram](https://t.me/LiteLoaderQQNT)
 
 ## 用法
 
-1. 安装 [LiteLoaderQQNT](https://github.com/mo-jinran/LiteLoaderQQNT) 本体
+1. 安装 [LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT) 本体
 2. 在 LiteLoaderQQNT 插件目录克隆本仓库（或下载仓库源码放入插件目录）
 3. 启动/重启 QQNT
 4. 在设置中调整需要模糊处理的元素和模糊度
@@ -22,5 +22,6 @@ LiteLoaderQQNT Telegram 闲聊群：[Telegram](https://t.me/LiteLoaderQQNT)
 
 ### TODO
 
-- [x] 模糊度设置
-- [ ] 对独立聊天窗口生效
+- [x] 模糊度设置（1.1.0）
+- [x] 对独立聊天窗口生效（2.0.0）
+- [x] 对转发消息窗口生效（2.0.0）

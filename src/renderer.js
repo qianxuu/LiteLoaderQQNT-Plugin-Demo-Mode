@@ -1,5 +1,5 @@
-const { getConfig, setConfig } = window.DemoMode
-const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins['demo_mode'].path
+const { getConfig, setConfig, onClick, onChange, getStatus } = window.DemoMode
+const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins.DemoMode.path
 
 const DEMO_MODE_BTN_HTML = `<div id="demoModeBtn" style="app-region: no-drag; display: flex; justify-content: center; margin-bottom: 16px">
   <i style="color: var(--icon_primary); width: 24px">
@@ -17,61 +17,96 @@ const DEMO_MODE_BTN_STYLE_HTML = `<style>
   }
 </style>`
 
+// 添加演示模式样式
+const addDemoModeStyle = () => {
+  // 获取配置
+  getConfig(dataPath).then((config) => {
+    const { checkbox, style } = config
+    const { blur } = style.filter
+    let selectors = []
+
+    // 遍历配置文件
+    for (const key in checkbox) {
+      // 遍历配置子项
+      for (const subKey in checkbox[key]) {
+        // 如果配置为 true，则插入样式
+        if (checkbox[key][subKey].checked) {
+          const { selector } = checkbox[key][subKey]
+          selectors.push(selector)
+        }
+      }
+    }
+
+    // 转为字符串
+    const selectorsStr = selectors.join(',')
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      `<style id="demoModeStyle">${selectorsStr}{filter:blur(${blur}px)}</style>`
+    )
+  })
+}
+
+// 添加演示模式按钮
 const addDemoModeBtn = () => {
   // 获取功能菜单
   const funcMenu = document.querySelector('.func-menu')
-  if (funcMenu) {
-    // 插入演示模式按钮和悬停样式
-    funcMenu.insertAdjacentHTML('afterbegin', DEMO_MODE_BTN_HTML)
-    document.head.insertAdjacentHTML('beforeend', DEMO_MODE_BTN_STYLE_HTML)
-    // 监听演示模式按钮点击
-    const demoModeBtn = document.querySelector('#demoModeBtn')
-    demoModeBtn.addEventListener('click', () => {
-      // 获取演示模式样式
-      const demoModeStyle = document.querySelectorAll('.demoModeStyle')
-      // 开关
-      if (demoModeStyle.length !== 0) {
-        demoModeStyle.forEach((item) => item.remove())
-      } else {
-        // 获取配置
-        getConfig(dataPath).then((config) => {
-          const { checkbox, style } = config
-          const { blur } = style.filter
-          // 遍历配置文件中的配置
-          for (const key in checkbox) {
-            // 遍历配置子项
-            for (const subKey in checkbox[key]) {
-              // 如果配置为 true，则插入样式
-              if (checkbox[key][subKey].checked) {
-                const { selector } = checkbox[key][subKey]
-                document.head.insertAdjacentHTML(
-                  'beforeend',
-                  `<style class="demoModeStyle">
-                      ${selector} {
-                        filter: blur(${blur}px);
-                      }
-                    </style>`
-                )
-              }
-            }
-          }
-        })
+
+  // 插入演示模式按钮
+  funcMenu.insertAdjacentHTML('afterbegin', DEMO_MODE_BTN_HTML)
+  document.head.insertAdjacentHTML('beforeend', DEMO_MODE_BTN_STYLE_HTML)
+
+  // 监听演示模式按钮点击
+  const demoModeBtn = document.querySelector('#demoModeBtn')
+  demoModeBtn.addEventListener('click', () => {
+    // 向主进程发送点击按钮消息
+    onClick()
+  })
+}
+
+// 响应演示模式状态变化
+onChange((status) => {
+  // 判断当前是否为目标页面
+  const isTargetPage = ['#/main', '#/chat', '#/forward'].some((hash) => location.hash.includes(hash))
+  if (isTargetPage) {
+    const demoModeStyle = document.querySelector('#demoModeStyle')
+    if (status && !demoModeStyle) {
+      addDemoModeStyle()
+    } else if (demoModeStyle) {
+      demoModeStyle.remove()
+    }
+  }
+})
+
+// 主页添加演示模式按钮定时器
+const addDemoModeBtnInterval = setInterval(() => {
+  // 判断当前是否为目标页面
+  if (location.hash.includes('#/main')) {
+    clearInterval(addDemoModeBtnInterval)
+
+    addDemoModeBtn()
+  }
+}, 500)
+
+// 页面添加演示模式样式定时器
+const addDemoModeStyleInterval = setInterval(() => {
+  // 判断当前是否为目标页面
+  const isTargetPage = ['#/main', '#/chat', '#/forward'].some((hash) => location.hash.includes(hash))
+  if (isTargetPage) {
+    clearInterval(addDemoModeStyleInterval)
+
+    getStatus().then((status) => {
+      // 判断当前是否为目标页面
+      if (status) {
+        addDemoModeStyle()
       }
     })
   }
-}
-
-// 等待页面就绪
-const addDemoModeBtnInterval = setInterval(() => {
-  if (location.hash.includes('#/main')) {
-    clearInterval(addDemoModeBtnInterval)
-    addDemoModeBtn()
-  }
-}, 1000)
+}, 500)
 
 // 超时清除定时器
 setTimeout(() => {
   clearInterval(addDemoModeBtnInterval)
+  clearInterval(addDemoModeStyleInterval)
 }, 10000)
 
 export const onSettingWindowCreated = async (view) => {

@@ -2,9 +2,9 @@
   "manifest_version": 4,
   "type": "extension",
   "name": "演示模式",
-  "slug": "demo_mode",
+  "slug": "DemoMode",
   "description": "对 QQ 界面上的元素进行模糊处理以便演示或截图",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "icon": "./icon.png",
   "authors": [
     {

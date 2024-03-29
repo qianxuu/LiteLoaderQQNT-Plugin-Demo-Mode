@@ -12,6 +12,9 @@
       },
       "notice": {
         "selector": ".group-notice > .content"
+      },
+      "label": {
+        "selector": ".group-box__container .group-user__label > .title"
       }
     },
     "messageList": {
@@ -19,7 +22,7 @@
         "selector": ".message-container__avatar, .avatar-row > .avatar-white-border"
       },
       "contactName": {
-        "selector": ".chat-header__title > .text-ellipsis"
+        "selector": ".chat-header__contact-name > .text-ellipsis > span"
       },
       "content": {
         "selector": ".msg-content-container, .forward-msg"
@@ -28,13 +31,16 @@
         "selector": ".ck-content > p"
       },
       "membersCount": {
-        "selector": ".chat-header__title > .text-ellipsis + span"
+        "selector": ".chat-header__contact-name > .text-ellipsis + span"
       },
       "name": {
         "selector": ".user-name > .text-ellipsis, .text-element--at, .reply-title > .reply-info > .text-ellipsis, .av-call-info > .name-text"
       },
       "time": {
         "selector": ".babble"
+      },
+      "label": {
+        "selector": ".message-container .group-member-label > .title"
       },
       "tip": {
         "selector": ".gray-tip-content"
@@ -68,5 +74,5 @@
       "blur": 0
     }
   },
-  "version": "1.2.0"
+  "version": "1.3.0"
 }

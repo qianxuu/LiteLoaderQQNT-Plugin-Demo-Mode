@@ -25,7 +25,7 @@
         "selector": ".chat-header__contact-name > .text-ellipsis > span"
       },
       "content": {
-        "selector": ".msg-content-container, .forward-msg"
+        "selector": ".message-content__wrapper :is(.text-element, .face-element, .market-face-element, .pic-element, .video-element, .file-element, .reply-element, .markdown-element, .inline-keyboard-element, .ark-view-message)"
       },
       "input": {
         "selector": ".ck-content > p"
@@ -74,5 +74,5 @@
       "blur": 0
     }
   },
-  "version": "1.3.0"
+  "version": "1.3.1"
 }

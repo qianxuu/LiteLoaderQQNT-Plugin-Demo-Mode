@@ -4,8 +4,9 @@
   "name": "演示模式",
   "slug": "DemoMode",
   "description": "对 QQ 界面上的元素进行模糊处理以便演示或截图",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "icon": "./icon.png",
+  "thumb": "./icon.png",
   "authors": [
     {
       "name": "谦虚",
@@ -14,9 +15,9 @@
   ],
   "platform": ["win32", "linux", "darwin"],
   "injects": {
-    "renderer": "./src/renderer.js",
     "main": "./src/main.js",
-    "preload": "./src/preload.js"
+    "preload": "./src/preload.js",
+    "renderer": "./src/renderer.js"
   },
   "repository": {
     "repo": "qianxuu/LiteLoaderQQNT-Plugin-Demo-Mode",

@@ -1,36 +1,16 @@
 const { getConfig, setConfig, onClick, onChange, getStatus } = window.DemoMode
 const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins.DemoMode.path
 
-/**
- * 切换开关状态
- * @param {HTMLInputElement} el
- */
-const toggleSwitch = (el) => {
-  if (el.hasAttribute('is-active')) el.removeAttribute('is-active')
-  else el.setAttribute('is-active', '')
-}
-
-/**
- * 判断开关状态
- * @param {HTMLInputElement} el
- */
-const isSwitchChecked = (el) => el.hasAttribute('is-active')
-
 const DEMO_MODE_BTN_HTML = `<div id="demoModeBtn" style="app-region: no-drag; display: flex; justify-content: center; margin-bottom: 16px">
-  <i style="color: var(--icon_primary); width: 24px">
-    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <i style="color: var(--icon_primary)">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
       <path
-        d="M 42.470703 3.9863281 A 1.50015 1.50015 0 0 0 41.439453 4.4394531 L 28.025391 17.853516 C 28.02058 17.85139 28.016533 17.847821 28.011719 17.845703 L 25.652344 20.205078 C 25.657802 20.206406 25.662515 20.209597 25.667969 20.210938 L 17.210938 28.667969 C 17.209447 28.661908 17.206553 28.656457 17.205078 28.650391 L 14.845703 31.009766 C 14.848052 31.015107 14.851157 31.020054 14.853516 31.025391 L 4.4394531 41.439453 A 1.50015 1.50015 0 1 0 6.5605469 43.560547 L 16.513672 33.607422 C 18.345732 35.683816 21.01901 37 24 37 C 29.514 37 34 32.514 34 27 C 34 24.019566 32.683637 21.345974 30.607422 19.513672 L 35.052734 15.068359 C 39.90447 17.90912 43.668811 22.496845 45.050781 27.869141 C 45.220781 28.549141 45.83 29 46.5 29 C 46.62 29 46.749141 28.989219 46.869141 28.949219 C 47.679141 28.749219 48.159219 27.930859 47.949219 27.130859 C 46.409379 21.128251 42.461227 16.073087 37.277344 12.84375 L 43.560547 6.5605469 A 1.50015 1.50015 0 0 0 42.470703 3.9863281 z M 23.990234 9 C 12.820234 9 2.7507813 16.620859 0.05078125 27.130859 C -0.15921875 27.930859 0.32085937 28.749219 1.1308594 28.949219 C 1.9308594 29.159219 2.7492187 28.679141 2.9492188 27.869141 C 5.2792187 18.819141 14.330234 12 23.990234 12 C 25.700234 12 27.389531 12.209141 29.019531 12.619141 L 31.480469 10.160156 C 29.090469 9.4001562 26.570234 9 23.990234 9 z M 24 17 C 18.486 17 14 21.486 14 27 C 14 27.197 14.017297 27.390938 14.029297 27.585938 L 17.751953 23.863281 C 18.428953 22.521281 19.521281 21.428953 20.863281 20.751953 L 24.583984 17.029297 C 24.389984 17.017297 24.197 17 24 17 z M 28.472656 21.648438 C 30.00901 22.931321 31 24.845705 31 27 C 31 30.859 27.86 34 24 34 C 21.845705 34 19.931321 33.009291 18.648438 31.472656 L 21.488281 28.632812 A 3 3 0 0 0 24 30 A 3 3 0 0 0 25.632812 24.488281 L 28.472656 21.648438 z"
+        d="m630.196-422.109-51.892-51.652q24.805-64.543-23.532-106.282-48.337-41.739-102.446-19.696l-50.217-50.457q16.521-10.282 36.804-15.043Q459.196-670 480-670q71 0 120.5 49.5T650-500q0 20.565-5.141 41.706-5.142 21.142-14.663 36.185Zm133.543 134.022-43.587-43.826q47.805-35.761 83.348-79.663 35.543-43.902 53.261-88.424-50.478-110.761-150.12-175.38Q607-740 490-740q-42 0-85.043 7.761-43.044 7.761-66.609 18.282L287.565-765.5q35-16 90.218-28Q433-805.5 485-805.5q143.957 0 264.011 82.337Q869.065-640.826 925.5-500q-25.761 64.478-67.119 118.076-41.359 53.598-94.642 93.837Zm50.109 226.24L649.196-223.74q-35 14-79.239 21.62Q525.717-194.5 480-194.5q-147.196 0-267.75-82.456Q91.696-359.413 34.5-500q19.522-51.761 55.38-101.859 35.859-50.098 86.381-95.815L50.978-822.478l43.913-45.152 759.87 759.869-40.913 45.913Zm-592.522-590.24q-36.761 27.478-70.185 70.402T102.478-500q51.239 111 153.381 175.5Q358-260 488-260q31.565 0 62.728-3.761t47.163-11.761l-64-64q-10.282 4.761-25.445 7.142Q493.283-330 480-330q-70 0-120-49t-50-121q0-14.043 2.261-28.326 2.261-14.283 6.782-25.565l-97.717-98.196ZM530.63-513.435Zm-121.021 60.631Z"
         fill="currentColor"
       />
     </svg>
   </i>
 </div>`
-const DEMO_MODE_BTN_STYLE_HTML = `<style>
-  #demoModeBtn i:hover {
-    color: var(--brand_standard) !important;
-  }
-</style>`
 
 // 添加演示模式样式
 const addDemoModeStyle = () => {
@@ -56,7 +36,7 @@ const addDemoModeStyle = () => {
     const selectorsStr = selectors.join(',')
     document.head.insertAdjacentHTML(
       'beforeend',
-      `<style id="demoModeStyle">${selectorsStr}{filter:blur(${blur}px)}</style>`
+      `<style id="demoModeStyle">${selectorsStr}{filter:blur(${blur}px)!important}</style>`
     )
   })
 }
@@ -68,7 +48,10 @@ const addDemoModeBtn = () => {
 
   // 插入演示模式按钮
   funcMenu.insertAdjacentHTML('afterbegin', DEMO_MODE_BTN_HTML)
-  document.head.insertAdjacentHTML('beforeend', DEMO_MODE_BTN_STYLE_HTML)
+  document.head.insertAdjacentHTML(
+    'beforeend',
+    '<style>#demoModeBtn i:hover{color:var(--brand_standard)!important}</style>'
+  )
 
   // 监听演示模式按钮点击
   const demoModeBtn = document.querySelector('#demoModeBtn')
@@ -123,6 +106,21 @@ setTimeout(() => {
   clearInterval(addDemoModeBtnInterval)
   clearInterval(addDemoModeStyleInterval)
 }, 10000)
+
+/**
+ * 切换开关状态
+ * @param {HTMLInputElement} el
+ */
+const toggleSwitch = (el) => {
+  if (el.hasAttribute('is-active')) el.removeAttribute('is-active')
+  else el.setAttribute('is-active', '')
+}
+
+/**
+ * 判断开关状态
+ * @param {HTMLInputElement} el
+ */
+const isSwitchChecked = (el) => el.hasAttribute('is-active')
 
 export const onSettingWindowCreated = async (view) => {
   // 获取设置页文件路径

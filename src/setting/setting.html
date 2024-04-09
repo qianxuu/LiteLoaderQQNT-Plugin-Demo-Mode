@@ -1,107 +1,119 @@
-<div>
-  <setting-section data-title="模糊项">
-    <setting-panel><setting-list data-direction="row">
-        <setting-list id="user" data-direction="column">
-          <setting-item><setting-text>个人</setting-text></setting-item>
-          <setting-item>
-            <setting-text>头像</setting-text>
-            <setting-switch id="userAvatar" data-name="avatar"></setting-switch>
-          </setting-item>
-        </setting-list>
-        <setting-list id="sessionList" data-direction="column">
-          <setting-item><setting-text>会话列表</setting-text></setting-item>
-          <setting-item>
-            <setting-text>名称</setting-text>
-            <setting-switch id="sessionListAvatar" data-name="avatar"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>摘要</setting-text>
-            <setting-switch id="sessionListTitle" data-name="title"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>时间</setting-text>
-            <setting-switch id="sessionListSummary" data-name="time"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>气泡</setting-text>
-            <setting-switch id="sessionListTime" data-name="bubble"></setting-switch>
-          </setting-item>
-        </setting-list>
-        <setting-list id="messageList" data-direction="column">
-          <setting-item><setting-text>消息列表</setting-text></setting-item>
-          <setting-item>
-            <setting-text>顶部名称</setting-text>
-            <setting-switch id="messageListContactName" data-name="contactName"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>人数</setting-text>
-            <setting-text data-type="secondary">（仅群聊）</setting-text>
-            <setting-switch id="messageListMembersCount" data-name="membersCount"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>头像</setting-text>
-            <setting-switch id="messageListAvatar" data-name="avatar"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>名称</setting-text>
-            <setting-text data-type="secondary">（仅群聊）</setting-text>
-            <setting-switch id="messageListName" data-name="name"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>输入框</setting-text>
-            <setting-switch id="messageListInput" data-name="input"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>时间</setting-text>
-            <setting-switch id="messageListTime" data-name="time"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>提示</setting-text>
-            <setting-text data-type="secondary">（如撤回）</setting-text>
-            <setting-switch id="messageListTip" data-name="tip"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>头衔</setting-text>
-            <setting-switch id="messageListLable" data-name="label"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>内容</setting-text>
-            <setting-switch id="messageListContent" data-name="content"></setting-switch>
-          </setting-item>
-        </setting-list>
-        <setting-list id="groupSidebar" data-direction="column">
-          <setting-item><setting-text>群组侧栏</setting-text></setting-item>
-          <setting-item>
-            <setting-text>公告</setting-text>
-            <setting-switch id="groupSidebarNotice" data-name="notice"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>人数</setting-text>
-            <setting-switch id="groupSidebarMembersCount" data-name="membersCount"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>头像</setting-text>
-            <setting-switch id="groupSidebarAvatar" data-name="avatar"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>名称</setting-text>
-            <setting-switch id="groupSidebarName" data-name="name"></setting-switch>
-          </setting-item>
-          <setting-item>
-            <setting-text>头衔</setting-text>
-            <setting-switch id="groupSidebarLable" data-name="label"></setting-switch>
-          </setting-item>
-        </setting-list>
-      </setting-list></setting-panel>
-  </setting-section>
-  <setting-section data-title="模糊度">
-    <setting-panel>
-      <setting-list data-direction="column">
+<setting-section data-title="模糊项">
+  <setting-panel>
+    <setting-list data-direction="row">
+      <setting-list id="user" data-direction="column">
         <setting-item>
-          <input type="range" id="blurRadiusRange" data-name="blur-radius" min="1" max="50" />
-          <input type="number" id="blurRadiusNumber" data-name="blur-radius" min="1" max="50" />
+          <setting-text>个人</setting-text>
+        </setting-item>
+        <setting-item>
+          <setting-text>头像</setting-text>
+          <setting-switch id="userAvatar" data-name="avatar" />
         </setting-item>
       </setting-list>
-    </setting-panel>
-  </setting-section>
-</div>
+
+      <setting-list id="sessionList" data-direction="column">
+        <setting-item>
+          <setting-text>会话列表</setting-text>
+        </setting-item>
+        <setting-item>
+          <setting-text>名称</setting-text>
+          <setting-switch id="sessionListAvatar" data-name="avatar" />
+        </setting-item>
+        <setting-item>
+          <setting-text>摘要</setting-text>
+          <setting-switch id="sessionListTitle" data-name="title" />
+        </setting-item>
+        <setting-item>
+          <setting-text>时间</setting-text>
+          <setting-switch id="sessionListSummary" data-name="time" />
+        </setting-item>
+        <setting-item>
+          <setting-text>气泡</setting-text>
+          <setting-switch id="sessionListTime" data-name="bubble" />
+        </setting-item>
+      </setting-list>
+
+      <setting-list id="messageList" data-direction="column">
+        <setting-item>
+          <setting-text>消息列表</setting-text>
+        </setting-item>
+        <setting-item>
+          <setting-text>顶部名称</setting-text>
+          <setting-switch id="messageListContactName" data-name="contactName" />
+        </setting-item>
+        <setting-item>
+          <setting-text>人数</setting-text>
+          <setting-text data-type="secondary">仅群聊</setting-text>
+          <setting-switch id="messageListMembersCount" data-name="membersCount" />
+        </setting-item>
+        <setting-item>
+          <setting-text>头像</setting-text>
+          <setting-switch id="messageListAvatar" data-name="avatar" />
+        </setting-item>
+        <setting-item>
+          <setting-text>名称</setting-text>
+          <setting-text data-type="secondary">仅群聊</setting-text>
+          <setting-switch id="messageListName" data-name="name" />
+        </setting-item>
+        <setting-item>
+          <setting-text>输入框</setting-text>
+          <setting-switch id="messageListInput" data-name="input" />
+        </setting-item>
+        <setting-item>
+          <setting-text>时间</setting-text>
+          <setting-switch id="messageListTime" data-name="time" />
+        </setting-item>
+        <setting-item>
+          <setting-text>提示</setting-text>
+          <setting-text data-type="secondary">如撤回</setting-text>
+          <setting-switch id="messageListTip" data-name="tip" />
+        </setting-item>
+        <setting-item>
+          <setting-text>头衔</setting-text>
+          <setting-switch id="messageListLable" data-name="label" />
+        </setting-item>
+        <setting-item>
+          <setting-text>内容</setting-text>
+          <setting-switch id="messageListContent" data-name="content" />
+        </setting-item>
+      </setting-list>
+
+      <setting-list id="groupSidebar" data-direction="column">
+        <setting-item>
+          <setting-text>群组侧栏</setting-text>
+        </setting-item>
+        <setting-item>
+          <setting-text>公告</setting-text>
+          <setting-switch id="groupSidebarNotice" data-name="notice" />
+        </setting-item>
+        <setting-item>
+          <setting-text>人数</setting-text>
+          <setting-switch id="groupSidebarMembersCount" data-name="membersCount" />
+        </setting-item>
+        <setting-item>
+          <setting-text>头像</setting-text>
+          <setting-switch id="groupSidebarAvatar" data-name="avatar" />
+        </setting-item>
+        <setting-item>
+          <setting-text>名称</setting-text>
+          <setting-switch id="groupSidebarName" data-name="name" />
+        </setting-item>
+        <setting-item>
+          <setting-text>头衔</setting-text>
+          <setting-switch id="groupSidebarLable" data-name="label" />
+        </setting-item>
+      </setting-list>
+    </setting-list>
+  </setting-panel>
+</setting-section>
+
+<setting-section data-title="模糊度">
+  <setting-panel>
+    <setting-list data-direction="column">
+      <setting-item>
+        <input type="range" min="1" max="50" id="blurRadiusRange" />
+        <input type="number" min="1" max="50" id="blurRadiusNumber" />
+      </setting-item>
+    </setting-list>
+  </setting-panel>
+</setting-section>

@@ -3,18 +3,18 @@ const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins.DemoMode.path
 
 /**
  * 切换开关状态
- * @param {HTMLInputElement} el 
+ * @param {HTMLInputElement} el
  */
 const toggleSwitch = (el) => {
-  if (el.hasAttribute("is-active")) el.removeAttribute("is-active")
-  else el.setAttribute("is-active", "")
+  if (el.hasAttribute('is-active')) el.removeAttribute('is-active')
+  else el.setAttribute('is-active', '')
 }
 
 /**
  * 判断开关状态
- * @param {HTMLInputElement} el 
+ * @param {HTMLInputElement} el
  */
-const isSwitchChecked = (el) => el.hasAttribute("is-active")
+const isSwitchChecked = (el) => el.hasAttribute('is-active')
 
 const DEMO_MODE_BTN_HTML = `<div id="demoModeBtn" style="app-region: no-drag; display: flex; justify-content: center; margin-bottom: 16px">
   <i style="color: var(--icon_primary); width: 24px">
@@ -147,11 +147,13 @@ export const onSettingWindowCreated = async (view) => {
       checkbox.addEventListener('click', () => {
         // 切换状态
         toggleSwitch(checkbox)
-        // 修改配置
+
+        // 写入配置文件
         config.checkbox[checkbox.parentNode.parentNode.id][checkbox.dataset.name].checked = isSwitchChecked(checkbox)
         setConfig(dataPath, config)
       })
     })
+
     // 从配置中获取模糊度
     const { blur } = config.style.filter
     // 获取模糊度输入框
@@ -165,10 +167,12 @@ export const onSettingWindowCreated = async (view) => {
     blurRadiusRange.addEventListener('input', () => {
       // 将值同步到 number 输入框
       blurRadiusNumber.value = blurRadiusRange.value
-      // 修改配置
+
+      // 写入配置文件
       config.style.filter.blur = blurRadiusRange.value
       setConfig(dataPath, config)
     })
+
     // 监听模糊度 number 输入框变化
     blurRadiusNumber.addEventListener('input', () => {
       // 如果值在 1-50 之外，则将值重置
@@ -179,9 +183,11 @@ export const onSettingWindowCreated = async (view) => {
           blurRadiusNumber.value = 50
         }
       }
+
       // 将值同步到 range 输入框
       blurRadiusRange.value = blurRadiusNumber.value
-      // 修改配置
+
+      // 写入配置文件
       config.style.filter.blur = blurRadiusNumber.value
       setConfig(dataPath, config)
     })

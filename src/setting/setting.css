@@ -3,7 +3,7 @@ setting-text {
 }
 
 #blurRadiusRange {
-  width: 100%;
+  width: 88%;
 }
 
 [type="range"] {
@@ -12,7 +12,6 @@ setting-text {
   margin: 0;
   outline: 0;
   background-color: transparent;
-  width: 500px;
 }
 
 [type="range"]::-webkit-slider-runnable-track {

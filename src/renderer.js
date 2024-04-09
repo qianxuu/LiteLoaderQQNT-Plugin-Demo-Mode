@@ -1,6 +1,21 @@
 const { getConfig, setConfig, onClick, onChange, getStatus } = window.DemoMode
 const { plugin: pluginPath, data: dataPath } = LiteLoader.plugins.DemoMode.path
 
+/**
+ * 切换开关状态
+ * @param {HTMLInputElement} el 
+ */
+const toggleSwitch = (el) => {
+  if (el.hasAttribute("is-active")) el.removeAttribute("is-active")
+  else el.setAttribute("is-active", "")
+}
+
+/**
+ * 判断开关状态
+ * @param {HTMLInputElement} el 
+ */
+const isSwitchChecked = (el) => el.hasAttribute("is-active")
+
 const DEMO_MODE_BTN_HTML = `<div id="demoModeBtn" style="app-region: no-drag; display: flex; justify-content: center; margin-bottom: 16px">
   <i style="color: var(--icon_primary); width: 24px">
     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -118,43 +133,22 @@ export const onSettingWindowCreated = async (view) => {
   view.insertAdjacentHTML('afterbegin', htmlText)
   // 插入设置页样式
   document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${cssFilePath}" />`)
-  // 获取是否为深色模式
-  const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-  // 设置深色模式样式
-  const setDarkStyle = () => {
-    document.documentElement.style.setProperty('--fieldset-border-color', 'rgba(255, 255, 255, 0.2)')
-    document.documentElement.style.setProperty('--blur-item-border-bottom-color', 'rgba(255, 255, 255, 0.06)')
-  }
-  // 如果为深色模式，则设置深色模式样式
-  if (prefersColorScheme.matches) {
-    setDarkStyle()
-  }
-  // 监听外观模式变化
-  prefersColorScheme.addEventListener('change', (event) => {
-    if (event.matches) {
-      setDarkStyle()
-    } else {
-      // 移除深色模式样式
-      document.documentElement.style.removeProperty('--fieldset-border-color')
-      document.documentElement.style.removeProperty('--blur-item-border-bottom-color')
-    }
-  })
   // 获取配置
   getConfig(dataPath).then((config) => {
     // 获取设置页所有复选框
-    const checkboxes = view.querySelectorAll('input[type="checkbox"]')
+    const checkboxes = view.querySelectorAll('setting-switch')
     // 遍历复选框
     checkboxes.forEach((checkbox) => {
       // 从配置中获取复选框状态
-      const { checked } = config.checkbox[checkbox.parentNode.parentNode.id][checkbox.name]
+      const { checked } = config.checkbox[checkbox.parentNode.parentNode.id][checkbox.dataset.name]
       // 设置复选框状态
-      if (checked) {
-        checkbox.checked = true
-      }
+      if (checked) toggleSwitch(checkbox)
       // 监听复选框点击
       checkbox.addEventListener('click', () => {
+        // 切换状态
+        toggleSwitch(checkbox)
         // 修改配置
-        config.checkbox[checkbox.parentNode.parentNode.id][checkbox.name].checked = checkbox.checked
+        config.checkbox[checkbox.parentNode.parentNode.id][checkbox.dataset.name].checked = isSwitchChecked(checkbox)
         setConfig(dataPath, config)
       })
     })

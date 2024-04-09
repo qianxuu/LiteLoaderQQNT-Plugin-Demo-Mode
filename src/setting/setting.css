@@ -1,69 +1,40 @@
-:root {
-  --fieldset-border-color: rgba(0, 0, 0, 0.2);
-  --blur-item-border-bottom-color: rgba(0, 0, 0, 0.04);
+setting-text {
+  margin-right: 10px;
 }
 
-.demo-mode-setting fieldset {
-  margin: 0 2px;
-  padding: 0.35em 0.75em 0.625em;
-  border: 1px solid var(--fieldset-border-color);
-  border-radius: 8px;
+#blurRadiusRange {
+  width: 100%;
 }
 
-.demo-mode-setting legend {
-  padding: 0 2px;
+[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 500px;
 }
 
-.demo-mode-setting input {
-  appearance: auto;
+[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #eee;
 }
 
-.demo-mode-setting .setting-item-title {
-  color: var(--text_primary);
-  font-weight: var(--font-bold);
-  font-size: min(var(--font_size_3), 18px);
-  line-height: min(var(--line_height_3), 24px);
-  margin: 0 0 8px 16px;
+[type="range" i]::-webkit-slider-container {
+  height: 20px;
+  overflow: hidden;
 }
 
-.demo-mode-setting .setting-item-content {
-  background-color: var(--fill_light_primary);
-  border-radius: 8px;
-  padding: 0 16px;
-  margin-bottom: 24px;
-}
-
-.demo-mode-setting .setting-item-content .blur-item {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--blur-item-border-bottom-color);
-  padding: 12px 0;
-}
-
-.demo-mode-setting .setting-item-content .blur-item .title {
-  display: flex;
-  align-items: center;
-}
-
-.demo-mode-setting .setting-item-content .blur-item .checkbox {
-  display: flex;
-  justify-content: space-between;
-}
-
-.demo-mode-setting .setting-item-content .blur-item .checkbox div {
-  display: flex;
-  align-items: center;
-}
-
-.demo-mode-setting .setting-item-content .blur-radius {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-}
-
-.demo-mode-setting .setting-item-content .blur-radius .input {
-  display: flex;
-  justify-items: center;
+[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--text-brand);
+  border: 1px solid transparent;
+  margin-top: -8px;
+  border-image: linear-gradient(var(--text-brand), var(--text-brand)) 0 fill / 8 20 8 0 / 0px 0px 0 2000px;
 }
 
 #blurRadiusNumber {

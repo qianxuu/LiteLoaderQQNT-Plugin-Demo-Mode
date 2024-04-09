@@ -4,9 +4,9 @@
   "name": "演示模式",
   "slug": "DemoMode",
   "description": "对 QQ 界面上的元素进行模糊处理以便演示或截图",
-  "version": "2.1.0",
-  "icon": "./icon.png",
-  "thumb": "./icon.png",
+  "version": "2.1.1",
+  "icon": "./icon.svg",
+  "thumb": "./icon.svg",
   "authors": [
     {
       "name": "谦虚",

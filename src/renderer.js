@@ -109,16 +109,13 @@ setTimeout(() => {
 
 /**
  * 切换开关状态
- * @param {HTMLInputElement} el
+ * @param {HTMLElement} el
  */
-const toggleSwitch = (el) => {
-  if (el.hasAttribute('is-active')) el.removeAttribute('is-active')
-  else el.setAttribute('is-active', '')
-}
+const toggleSwitch = (el) => el.toggleAttribute('is-active')
 
 /**
  * 判断开关状态
- * @param {HTMLInputElement} el
+ * @param {HTMLElement} el
  */
 const isSwitchChecked = (el) => el.hasAttribute('is-active')
 

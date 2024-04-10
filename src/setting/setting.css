@@ -1,4 +1,8 @@
-setting-text {
+#blurItems {
+  padding: 16px;
+}
+
+#blurItems setting-text {
   margin-right: 10px;
 }
 

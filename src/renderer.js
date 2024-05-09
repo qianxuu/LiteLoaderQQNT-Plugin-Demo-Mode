@@ -13,52 +13,52 @@ const DEMO_MODE_BTN_HTML = `<div id="demoModeBtn" style="app-region: no-drag; di
 </div>`
 
 // 添加演示模式样式
-const addDemoModeStyle = () => {
+const addDemoModeStyle = async () => {
   // 获取配置
-  getConfig(dataPath).then((config) => {
-    const { checkbox, style } = config
-    const { blur } = style.filter
-    let selectors = []
+  const config = await getConfig(dataPath)
+  const { checkbox, style } = config
+  let selectors = []
 
-    // 遍历配置文件
-    for (const key in checkbox) {
-      // 遍历配置子项
-      for (const subKey in checkbox[key]) {
-        // 如果配置为 true，则插入样式
-        if (checkbox[key][subKey].checked) {
-          const { selector } = checkbox[key][subKey]
-          selectors.push(selector)
-        }
+  // 遍历复选框配置
+  Object.keys(checkbox).forEach((key) => {
+    // 遍历配置子项
+    Object.keys(checkbox[key]).forEach((subKey) => {
+      // 如果复选框被选中，则将选择器加入数组
+      if (checkbox[key][subKey].checked) {
+        selectors.push(checkbox[key][subKey].selector)
       }
-    }
-
-    // 转为字符串
-    const selectorsStr = selectors.join(',')
-    document.head.insertAdjacentHTML(
-      'beforeend',
-      `<style id="demoModeStyle">${selectorsStr}{filter:blur(${blur}px)!important}</style>`
-    )
+    })
   })
+
+  // 将选择器数组转为字符串后插入样式
+  const selectorsStr = selectors.join(',')
+  document.head.insertAdjacentHTML(
+    'beforeend',
+    `<style id="demoModeStyle">${selectorsStr}{filter:blur(${style.filter.blur}px)!important}</style>`
+  )
 }
 
 // 添加演示模式按钮
 const addDemoModeBtn = () => {
   // 获取功能菜单
   const funcMenu = document.querySelector('.func-menu')
+  if (funcMenu) {
+    clearInterval(addDemoModeBtnInterval)
 
-  // 插入演示模式按钮
-  funcMenu.insertAdjacentHTML('afterbegin', DEMO_MODE_BTN_HTML)
-  document.head.insertAdjacentHTML(
-    'beforeend',
-    '<style>#demoModeBtn i:hover{color:var(--brand_standard)!important}</style>'
-  )
+    // 插入演示模式按钮
+    funcMenu.insertAdjacentHTML('afterbegin', DEMO_MODE_BTN_HTML)
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      '<style>#demoModeBtn i:hover{color:var(--brand_standard)!important}</style>'
+    )
 
-  // 监听演示模式按钮点击
-  const demoModeBtn = document.querySelector('#demoModeBtn')
-  demoModeBtn.addEventListener('click', () => {
-    // 向主进程发送点击按钮消息
-    onClick()
-  })
+    // 为按钮添加点击事件
+    const demoModeBtn = document.querySelector('#demoModeBtn')
+    demoModeBtn.addEventListener('click', () => {
+      // 向主进程发送点击按钮消息
+      onClick()
+    })
+  }
 }
 
 // 响应演示模式状态变化
@@ -79,27 +79,24 @@ onChange((status) => {
 const addDemoModeBtnInterval = setInterval(() => {
   // 判断当前是否为目标页面
   if (location.hash.includes('#/main')) {
-    clearInterval(addDemoModeBtnInterval)
-
     addDemoModeBtn()
   }
-}, 500)
+}, 100)
 
 // 页面添加演示模式样式定时器
-const addDemoModeStyleInterval = setInterval(() => {
+const addDemoModeStyleInterval = setInterval(async () => {
   // 判断当前是否为目标页面
   const isTargetPage = ['#/main', '#/chat', '#/forward'].some((hash) => location.hash.includes(hash))
   if (isTargetPage) {
     clearInterval(addDemoModeStyleInterval)
 
-    getStatus().then((status) => {
-      // 判断当前是否为目标页面
-      if (status) {
-        addDemoModeStyle()
-      }
-    })
+    // 获取演示模式状态
+    const status = await getStatus()
+    if (status) {
+      addDemoModeStyle()
+    }
   }
-}, 500)
+}, 100)
 
 // 超时清除定时器
 setTimeout(() => {
@@ -120,71 +117,69 @@ const toggleSwitch = (el) => el.toggleAttribute('is-active')
 const isSwitchChecked = (el) => el.hasAttribute('is-active')
 
 export const onSettingWindowCreated = async (view) => {
-  // 获取设置页文件路径
+  // 插入设置页
   const htmlFilePath = `local:///${pluginPath}/src/setting/setting.html`
   const cssFilePath = `local:///${pluginPath}/src/setting/setting.css`
-  // 插入设置页
   const htmlText = await (await fetch(htmlFilePath)).text()
   view.insertAdjacentHTML('afterbegin', htmlText)
-  // 插入设置页样式
   document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="${cssFilePath}" />`)
+
   // 获取配置
-  getConfig(dataPath).then((config) => {
-    // 获取设置页所有复选框
-    const checkboxes = view.querySelectorAll('setting-switch')
-    // 遍历复选框
-    checkboxes.forEach((checkbox) => {
-      // 从配置中获取复选框状态
-      const { checked } = config.checkbox[checkbox.parentNode.parentNode.id][checkbox.dataset.name]
-      // 设置复选框状态
-      if (checked) toggleSwitch(checkbox)
-      // 监听复选框点击
-      checkbox.addEventListener('click', () => {
-        // 切换状态
-        toggleSwitch(checkbox)
-
-        // 写入配置文件
-        config.checkbox[checkbox.parentNode.parentNode.id][checkbox.dataset.name].checked = isSwitchChecked(checkbox)
-        setConfig(dataPath, config)
-      })
-    })
-
-    // 从配置中获取模糊度
-    const { blur } = config.style.filter
-    // 获取模糊度输入框
-    const blurRadiusRange = view.querySelector('#blurRadiusRange')
-    const blurRadiusNumber = view.querySelector('#blurRadiusNumber')
-    // 设置模糊度输入框值
-    blurRadiusRange.value = blur
-    blurRadiusNumber.value = blur
-
-    // 监听模糊度 range 输入框变化
-    blurRadiusRange.addEventListener('input', () => {
-      // 将值同步到 number 输入框
-      blurRadiusNumber.value = blurRadiusRange.value
+  const config = await getConfig(dataPath)
+  // 获取设置页所有复选框
+  const checkboxes = view.querySelectorAll('setting-switch')
+  // 遍历复选框
+  checkboxes.forEach((checkbox) => {
+    // 从配置中获取复选框状态
+    const { checked } = config.checkbox[checkbox.parentNode.parentNode.id][checkbox.dataset.name]
+    // 设置复选框状态
+    if (checked) toggleSwitch(checkbox)
+    // 监听复选框点击
+    checkbox.addEventListener('click', () => {
+      // 切换状态
+      toggleSwitch(checkbox)
 
       // 写入配置文件
-      config.style.filter.blur = blurRadiusRange.value
+      config.checkbox[checkbox.parentNode.parentNode.id][checkbox.dataset.name].checked = isSwitchChecked(checkbox)
       setConfig(dataPath, config)
     })
+  })
 
-    // 监听模糊度 number 输入框变化
-    blurRadiusNumber.addEventListener('input', () => {
-      // 如果值在 1-50 之外，则将值重置
-      if (blurRadiusNumber.value < 1 || blurRadiusNumber.value > 50) {
-        if (blurRadiusNumber.value < 1) {
-          blurRadiusNumber.value = 1
-        } else {
-          blurRadiusNumber.value = 50
-        }
+  // 从配置中获取模糊度
+  const { blur } = config.style.filter
+  // 获取模糊度输入框
+  const blurRadiusRange = view.querySelector('#blurRadiusRange')
+  const blurRadiusNumber = view.querySelector('#blurRadiusNumber')
+  // 设置模糊度输入框值
+  blurRadiusRange.value = blur
+  blurRadiusNumber.value = blur
+
+  // 监听模糊度 range 输入框变化
+  blurRadiusRange.addEventListener('input', () => {
+    // 将值同步到 number 输入框
+    blurRadiusNumber.value = blurRadiusRange.value
+
+    // 写入配置文件
+    config.style.filter.blur = blurRadiusRange.value
+    setConfig(dataPath, config)
+  })
+
+  // 监听模糊度 number 输入框变化
+  blurRadiusNumber.addEventListener('input', () => {
+    // 如果值在 1-50 之外，则将值重置
+    if (blurRadiusNumber.value < 1 || blurRadiusNumber.value > 50) {
+      if (blurRadiusNumber.value < 1) {
+        blurRadiusNumber.value = 1
+      } else {
+        blurRadiusNumber.value = 50
       }
+    }
 
-      // 将值同步到 range 输入框
-      blurRadiusRange.value = blurRadiusNumber.value
+    // 将值同步到 range 输入框
+    blurRadiusRange.value = blurRadiusNumber.value
 
-      // 写入配置文件
-      config.style.filter.blur = blurRadiusNumber.value
-      setConfig(dataPath, config)
-    })
+    // 写入配置文件
+    config.style.filter.blur = blurRadiusNumber.value
+    setConfig(dataPath, config)
   })
 }

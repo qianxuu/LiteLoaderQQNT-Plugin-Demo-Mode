@@ -14,7 +14,7 @@
         "selector": ".group-notice > .content"
       },
       "label": {
-        "selector": ".group-box__container .group-user__label > .title"
+        "selector": ".group-box__container .group-user__label > :is(.level, .title)"
       }
     },
     "messageList": {
@@ -40,7 +40,7 @@
         "selector": ".babble"
       },
       "label": {
-        "selector": ".message-container .group-member-label > .title"
+        "selector": ".message-container .group-member-label > :is(.level, .title)"
       },
       "tip": {
         "selector": ".gray-tip-content"
@@ -74,5 +74,5 @@
       "blur": 0
     }
   },
-  "version": "1.3.5"
+  "version": "1.3.6"
 }

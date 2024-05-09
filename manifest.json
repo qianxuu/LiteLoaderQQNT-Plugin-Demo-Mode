@@ -4,7 +4,7 @@
   "name": "演示模式",
   "slug": "DemoMode",
   "description": "对 QQ 界面上的元素进行模糊处理以便演示或截图",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "icon": "./icon.svg",
   "thumb": "./icon.svg",
   "authors": [

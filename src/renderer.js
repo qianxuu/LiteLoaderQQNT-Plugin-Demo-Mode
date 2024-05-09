@@ -102,7 +102,7 @@ const addDemoModeStyleInterval = setInterval(async () => {
 setTimeout(() => {
   clearInterval(addDemoModeBtnInterval)
   clearInterval(addDemoModeStyleInterval)
-}, 10000)
+}, 60000)
 
 /**
  * 切换开关状态

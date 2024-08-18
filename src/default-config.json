@@ -48,7 +48,7 @@
     },
     "sessionList": {
       "avatar": {
-        "selector": ".list-item__avatar > :is(.avatar, .recent-contact-item__phone)"
+        "selector": ":is(.item__avatar, .list-item__avatar) > :is(.avatar, .recent-contact-item__phone)"
       },
       "bubble": {
         "selector": ".summary-bubble > :is(div, i)"
@@ -57,10 +57,10 @@
         "selector": ".summary-main.text-ellipsis"
       },
       "time": {
-        "selector": ".secondary-info.text-ellipsis > span"
+        "selector": ":is(.item__title, .list-item__title) > .secondary-info.text-ellipsis"
       },
       "title": {
-        "selector": ".list-item__container > .list-item__content > .list-item__info > .list-item__title > .main-info.text-ellipsis > :is(.text-ellipsis, .member-count)"
+        "selector": ":is(.item__title, .list-item__title) > .main-info.text-ellipsis > :is(.text-ellipsis, .member-count)"
       }
     },
     "user": {
@@ -74,5 +74,5 @@
       "blur": 0
     }
   },
-  "version": "1.3.6"
+  "version": "1.3.7"
 }

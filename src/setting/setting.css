@@ -1,49 +1,104 @@
+
 #blurItems {
-  padding: 16px;
+  padding: 16px;/* 为 id 为 'blurItems' 的元素设置内边距为 16px */
 }
 
-#blurItems setting-text {
-  margin-right: 10px;
+#blurItems .setting-text {
+  margin-right: 10px;/* 为 id 为 'blurItems' 的元素内部，class 为 'setting-text' 的子元素设置右边距为 10px */
 }
-
+/* 为 id 为 'blurRadiusRange' 的元素设置宽度为 88%，并且水平居中 */
 #blurRadiusRange {
   width: 88%;
+  margin: 0 auto; /* 如果希望滚动条在容器中居中 */
 }
-
+/* 为所有类型为 'range' 的 input 元素设置样式 */
 [type='range'] {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-  outline: 0;
-  background-color: transparent;
+  -webkit-appearance: none; /* 移除 WebKit 浏览器的默认外观 */
+  appearance: none; /* 移除所有浏览器的默认外观 */
+  margin: 0; /* 设置外边距为 0 */
+  outline: 0; /* 移除焦点时的外轮廓 */
+  background-color: transparent; /* 设置背景为透明 */
+  height: 20px; /* 确保与 thumb 的高度一致 */
+
 }
 
+/* 为类型为 'range' 的 input 元素的 WebKit 轨道部分设置样式 */
 [type='range']::-webkit-slider-runnable-track {
-  height: 4px;
-  background: #eee;
+  height: 20px; /* 设置轨道的高度 */
+  background: #eee; /* 设置轨道的背景颜色 */
+  border-radius: 10px; /* 给轨道增加圆角 */
 }
 
-[type='range' i]::-webkit-slider-container {
-  height: 20px;
-  overflow: hidden;
-}
-
+/* 为类型为 'range' 的 input 元素的 WebKit 滑块部分设置样式 */
 [type='range']::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+  -webkit-appearance: none; /* 移除 WebKit 浏览器的默认外观 */
+  appearance: none; /* 移除所有浏览器的默认外观 */
+  width: 20px; /* 设置滑块的宽度 */
+  height: 20px; /* 设置滑块的高度 */
+  border-radius: 50%; /* 使滑块成为圆形 */
   background-color: var(--text-brand);
-  border: 1px solid transparent;
-  margin-top: -8px;
-  border-image: linear-gradient(var(--text-brand), var(--text-brand)) 0 fill / 8 20 8 0 / 0px 0px 0 2000px;
+  border none; /* 移除边框 */
+ 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+  cursor: pointer; /* 提示用户可点击 */
 }
 
+/* 为类型为 'range' 的 input 元素的 WebKit 滑块伪元素设置样式 */
+[type='range']::-webkit-slider-thumb:before {
+  content: ""; /* 伪元素必须有内容，即使是空字符串 */
+display: none; /* 隐藏之前定义的伪元素 */
+  position: absolute; /* 设置绝对定位 */
+  top: 50%; /* 设置 top 为 50% */
+  left: 50%; /* 设置 left 为 50% */
+  transform: translate(-50%, -50%); /* 通过转换使伪元素居中 */
+  width: 100%; /* 设置伪元素的宽度为 100% */
+  height: 100%; /* 设置伪元素的高度为 100% */
+  border-radius: 50%; /* 使伪元素成为圆形 */
+  background-image: linear-gradient(var(--text-brand), var(--text-brand)); /* 使用伪元素来创建渐变背景 */
+}
+
+/* 为 id 为 'blurRadiusNumber' 的元素设置样式 */
 #blurRadiusNumber {
-  color: var(--text_primary);
-  width: 56px;
-  border-radius: 4px;
-  border: 1px solid var(--border_dark);
-  padding: 1px 8px 0;
+  color: var(--text_primary); /* 设置文本颜色 */
+  width: 56px; /* 设置宽度 */
+  border-radius: 4px; /* 设置边角半径 */
+  border: 1px solid var(--border_dark); /* 设置边框 */
+  padding: 1px 8px; /* 设置内边距 */
+  text-align: center; /* 让数字居中显示 */
+}
+/* 容器，用于包含滑块和背景 */
+.slider-container {
+  position: relative;
+  width: 88%;
+  margin: 0 auto;
+}
+
+/* 滑块轨道，初始为全灰色 */
+.slider-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
+/* 主题色部分，初始为隐藏 */
+.slider-theme {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--text-brand);
+  transition: width 0.2s; /* 平滑宽度变化 */
+}
+.spaced-switch {
+  margin-left: 20px; /* 根据需要调整间距的大小 */
+  margin-right: 20px; /* 根据需要调整间距的大小 */
+}
+.spaced-text {
+  margin-left: 20px; /* 根据需要调整间距的大小 */
 }
